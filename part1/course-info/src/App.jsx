@@ -1,13 +1,12 @@
-function Header(props) {
+function Header() {
   return(
     <div>
-      <h1>{props.course}</h1>
+      <h1>Half stack app development</h1>
     </div>
   )
 }
 
-function Content(props) {
- 
+function Part(props) {
   return(
     <div>
       <p>
@@ -23,6 +22,26 @@ function Content(props) {
   )
 }
 
+function Content(props) {
+ 
+  return(
+    <div>
+      <Part 
+      part1 = {props.part1}
+      excercises1 = {props.excercises1}
+      />
+      <Part 
+      part2 = {props.part2}
+      excercises2 = {props.excercises2}
+      />
+      <Part 
+      part3 = {props.part3}
+      excercises3 = {props.excercises3}
+      />
+    </div>
+  )
+}
+
 function Total(props) {
   return(
     <div>
@@ -32,7 +51,6 @@ function Total(props) {
 }
 
 function App() {
-  const course = 'Half stack app development'
   const part1 = 'Fundementals of react'
   const excercises1 = 10
   const part2 = 'Using props to pass data'
@@ -42,9 +60,7 @@ function App() {
 
   return (
     <div>
-    <Header
-    course = {course}
-    />
+    <Header />
 
     <Content
     part1 = {part1}
