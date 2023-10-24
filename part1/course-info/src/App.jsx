@@ -31,14 +31,14 @@ function Content(props) {
       <Part 
       part = {props.part3}
       />
-    </div>
+    </div> 
   )
 }
-function Total(props) {
+function Total(props) {   
   return(
    
     <div>
-       <p>Number of excercises {props.part1.excercises + props.part2.excercises + props.part3.excercises}</p>
+       <p>Number of excercises {props.part1.excercises + props.part2.excercises + props.part3.excercises}</p>   
     </div>
   )
 }
