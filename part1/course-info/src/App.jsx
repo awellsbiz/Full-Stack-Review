@@ -50,7 +50,29 @@ function Button(props){
     <button onClick={props.handleClick}>{props.text}</button>
   )
 }
+function Statistics(props){
+  return <p>{props.text} : {props.feedback}</p>
+}
+function StatTotal(props){
 
+  const total = props.good + props.bad + props.neutral
+  
+  const calculateAverage = () =>{
+    return total/3
+  }
+
+  const calculatePercentage = () => {
+    if (props.good === 0) return 0
+    return (props.good/total) * 100
+  }
+  return (
+    <div>
+  <p>Total: {props.good + props.bad + props.neutral}</p>
+  <p>Average: {calculateAverage()}</p>
+  <p>Percentage: {calculatePercentage()}%</p>
+  </div>
+  )
+}
 
 function App() {
   const [good, setGood] = useState(0)
@@ -99,7 +121,11 @@ function App() {
     <Button handleClick = {()=> setBad(bad + 1)} text= 'Bad' />
 
     <Header course = 'Statistics' />
+    <Statistics text= 'Good' feedback={good} />
+    <Statistics text= 'Neutral' feedback={neutral} />
+    <Statistics text= 'Bad' feedback={bad} />
     
+    <StatTotal good={good} bad={bad} neutral={neutral} />
 
 
 
