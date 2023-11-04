@@ -3,7 +3,7 @@ import {useState} from 'react'
 function Header(props) {
   return(
     <div>
-      <h1>{props.course}</h1>
+      <h1>{props.text}</h1>
     </div>
   )
 }
@@ -51,22 +51,27 @@ function Button(props){
   )
 }
 function Statistics(props){
-  return <p>{props.text} : {props.feedback}</p>
-}
-function StatTotal(props){
-
   const total = props.good + props.bad + props.neutral
-  
+
   const calculateAverage = () =>{
     return total/3
   }
 
   const calculatePercentage = () => {
     if (props.good === 0) return 0
-    return (props.good/total) * 100
+    const percentage = Math.round((props.good/total) * 100)
+    return percentage
   }
+
+  if (props.good === 0 && props.bad === 0 && props.neutral === 0) {
+      return <p>No feedback given</p>
+    }
+
   return (
     <div>
+  <p>Good: {props.good}</p>
+  <p>Neutral: {props.neutral}</p>
+  <p>Bad: {props.bad}</p>
   <p>Total: {props.good + props.bad + props.neutral}</p>
   <p>Average: {calculateAverage()}</p>
   <p>Percentage: {calculatePercentage()}%</p>
@@ -102,7 +107,7 @@ function App() {
   return (
     <div>
     <Header
-    course = {course.name} />
+    text= {course.name} />
 
     <Content
     part1 = {course.parts[0]}
@@ -115,17 +120,14 @@ function App() {
      part2 = {course.parts[1]}
      part3 = {course.parts[2]}
     />
-    <Header course = 'Give Feedback' />
+    <Header text= 'Give Feedback' />
     <Button handleClick = {()=> setGood(good + 1)} text= 'Good' />
     <Button handleClick = {()=> setNeutral(neutral + 1)} text = 'Nuetral' />
     <Button handleClick = {()=> setBad(bad + 1)} text= 'Bad' />
 
-    <Header course = 'Statistics' />
-    <Statistics text= 'Good' feedback={good} />
-    <Statistics text= 'Neutral' feedback={neutral} />
-    <Statistics text= 'Bad' feedback={bad} />
+    <Header text= 'Statistics' />
     
-    <StatTotal good={good} bad={bad} neutral={neutral} />
+    <Statistics good={good} bad={bad} neutral={neutral} />
 
 
 
