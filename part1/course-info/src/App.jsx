@@ -1,3 +1,5 @@
+import {useState} from 'react'
+
 function Header(props) {
   return(
     <div>
@@ -18,7 +20,6 @@ function Part(props) {
 }
 
 function Content(props) {
-  console.log(props)
  
   return(
     <div>
@@ -43,7 +44,19 @@ function Total(props) {
   )
 }
 
+function Button(props){
+
+  return(
+    <button onClick={props.handleClick}>{props.text}</button>
+  )
+}
+
+
 function App() {
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
+
   const course = {
     name: 'Half stack app development',
     parts: [
@@ -62,6 +75,8 @@ function App() {
 ]
   }
 
+
+
   return (
     <div>
     <Header
@@ -78,6 +93,16 @@ function App() {
      part2 = {course.parts[1]}
      part3 = {course.parts[2]}
     />
+    <Header course = 'Give Feedback' />
+    <Button handleClick = {()=> setGood(good + 1)} text= 'Good' />
+    <Button handleClick = {()=> setNeutral(neutral + 1)} text = 'Nuetral' />
+    <Button handleClick = {()=> setBad(bad + 1)} text= 'Bad' />
+
+    <Header course = 'Statistics' />
+    
+
+
+
     
     </div>
   )
