@@ -50,39 +50,16 @@ function Button(props){
     <button onClick={props.handleClick}>{props.text}</button>
   )
 }
-function Statistics(props){
-  const total = props.good + props.bad + props.neutral
+const StatisticLine = ({ text, value }) => <div> <p>{text}: {value}</p></div>
+  
 
-  const calculateAverage = () =>{
-    return total/3
-  }
-
-  const calculatePercentage = () => {
-    if (props.good === 0) return 0
-    const percentage = Math.round((props.good/total) * 100)
-    return percentage
-  }
-
-  if (props.good === 0 && props.bad === 0 && props.neutral === 0) {
-      return <p>No feedback given</p>
-    }
-
-  return (
-    <div>
-  <p>Good: {props.good}</p>
-  <p>Neutral: {props.neutral}</p>
-  <p>Bad: {props.bad}</p>
-  <p>Total: {props.good + props.bad + props.neutral}</p>
-  <p>Average: {calculateAverage()}</p>
-  <p>Percentage: {calculatePercentage()}%</p>
-  </div>
-  )
-}
 
 function App() {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
+
+  
 
   const course = {
     name: 'Half stack app development',
@@ -102,6 +79,32 @@ function App() {
 ]
   }
 
+  function renderStatistics() {
+    const total = good + bad + neutral
+
+    const calculateAverage = () =>{
+    return total/3
+  }
+
+  const calculatePercentage = () => {
+    if (good === 0) return 0
+    const percentage = Math.round((good/total) * 100)
+    return percentage + '%'
+  }
+    if (total === 0) {
+        return <p>No feedback given</p>
+      }
+    return (
+      <>
+      <StatisticLine text='Good' value={good} />
+      <StatisticLine text='Neutral' value={neutral} />
+      <StatisticLine text='Bad' value={bad} />
+      <StatisticLine text='Average' value={calculateAverage()} />
+      <StatisticLine text='Percentage' value={calculatePercentage()} />
+      </>
+    )
+  
+  }
 
 
   return (
@@ -126,8 +129,10 @@ function App() {
     <Button handleClick = {()=> setBad(bad + 1)} text= 'Bad' />
 
     <Header text= 'Statistics' />
+
+    {renderStatistics()}
     
-    <Statistics good={good} bad={bad} neutral={neutral} />
+
 
 
 
