@@ -1,17 +1,19 @@
 import {useState} from 'react'
 
-function Button({nextAnecdote}){
-  return <button onClick={nextAnecdote}>New Anecdote</button>
+function Button({action, text}){
+
+  return <button onClick={action}>{text}</button>
 }
 
 function Content({text}){
+
   return <p>{text}</p>
 }
 
+
+
+
 function App() {
-
-  const [selected, setSelected] = useState(0)
-
   const anecdotes = ['If it hurts, do it more often.',
   'Adding manpower to a late software project makes it later!',
   'The first 90 percent of the code accounts for the first 10 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
@@ -21,15 +23,33 @@ function App() {
   'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
   'The only way to go fast, is to go well.']
 
+  const [selected, setSelected] = useState(0)
+  const [vote, setVote] = useState(new Array(anecdotes.length).fill(0))
+ 
+
+
+
  const randomGenerator = () => {
     const randomIndex = Math.floor(Math.random() * anecdotes.length)
     setSelected(randomIndex)
  }
 
+ const handleVote = () => {
+  console.log('this is the votes state starting', vote)
+  setVote(previousVote => {
+    const updatedVote = [...previousVote]
+    updatedVote[selected] += 1
+    console.log('this is the updated vote', updatedVote)
+    return updatedVote 
+  })
+}
+
   return (
     <div>
-      <Content text= {anecdotes[selected]} />
-    <Button nextAnecdote= {() => randomGenerator()} />
+    <Content text= {anecdotes[selected]} />
+    <Button action= {() => randomGenerator()} text= 'New Anecdote'/>
+    <Button action= {handleVote} text= 'Vote'/>
+  
     </div>
   )
 }
