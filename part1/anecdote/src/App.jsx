@@ -1,5 +1,9 @@
 import {useState} from 'react'
 
+function Header({text}) {
+  return <h1>{text}</h1>
+}
+
 function Button({action, text}){
 
   return <button onClick={action}>{text}</button>
@@ -7,13 +11,14 @@ function Button({action, text}){
 
 function Content({text}){
 
-  return <p>{text}</p>
+  return <div>{text}</div>
 }
 
 
 
 
 function App() {
+  
   const anecdotes = ['If it hurts, do it more often.',
   'Adding manpower to a late software project makes it later!',
   'The first 90 percent of the code accounts for the first 10 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
@@ -28,27 +33,42 @@ function App() {
  
 
 
-
  const randomGenerator = () => {
     const randomIndex = Math.floor(Math.random() * anecdotes.length)
     setSelected(randomIndex)
  }
 
  const handleVote = () => {
-  console.log('this is the votes state starting', vote)
   setVote(previousVote => {
     const updatedVote = [...previousVote]
     updatedVote[selected] += 1
-    console.log('this is the updated vote', updatedVote)
     return updatedVote 
   })
+
+}
+
+const popularVote = () => {
+ let topVoteIndex = 0
+ let maxVote = vote[0]
+
+ for(let i = 1; i < vote.length; i++){
+  if (vote[i] > maxVote){
+    maxVote = vote[i];
+    topVoteIndex = i
+  }
+ }
+ return <p>{anecdotes[topVoteIndex]}</p>
 }
 
   return (
     <div>
+    <Header text ='Anecdote of the Day' />
     <Content text= {anecdotes[selected]} />
     <Button action= {() => randomGenerator()} text= 'New Anecdote'/>
     <Button action= {handleVote} text= 'Vote'/>
+    <Header text = 'Most Popular Anecdote' />
+    <Content text={popularVote()} />
+
   
     </div>
   )
