@@ -3,7 +3,8 @@ import Course from './Course'
 function App() {
   
 
-  const course = {
+  const courses = [
+    {
     id: 1,
     name: 'Half Stack application development',
     parts: [
@@ -23,11 +24,36 @@ function App() {
         id: 3
       }
     ]
+  },
+  {
+    name: 'Node.js',
+    id: 2,
+    parts: [
+      {
+        name: 'Routing',
+        exercises: 3,
+        id: 1
+      },
+      {
+        name: 'Middlewares',
+        exercises: 7,
+        id: 2
+      }
+    ]
   }
+]
 
 
   return (
-    <Course course={course} />
+    <>
+      {courses.map(course => {
+        return(
+          <Course key={course.id} course={course} />
+        )
+      })}
+
+    </>
+
   )
 }
 
