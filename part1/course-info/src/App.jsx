@@ -1,56 +1,6 @@
-import {useState} from 'react'
-
-function Header(props) {
-  return(
-    <div>
-      <h1>{props.text}</h1>
-    </div>
-  )
-}
-
-function Part(props) {
-
-  return(
-    <div>
-      <p>
-      {props.part.name} {props.part.excercises}
-     </p>
-    </div>
-  )
-}
-
-function Content(props) {
- 
-  return(
-    <div>
-      <Part 
-      part = {props.part1}
-      />
-      <Part 
-      part = {props.part2}
-      />
-      <Part 
-      part = {props.part3}
-      />
-    </div> 
-  )
-}
-function Total(props) {   
-  return(
-   
-    <div>
-       <p>Number of excercises {props.part1.excercises + props.part2.excercises + props.part3.excercises}</p>   
-    </div>
-  )
-}
-  
-
+import Course from './Course'
 
 function App() {
-  const [good, setGood] = useState(0)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
-
   
 
   const course = {
@@ -73,22 +23,7 @@ function App() {
 
 
   return (
-    <div>
-    <Header
-    text= {course.name} />
-
-    <Content
-    part1 = {course.parts[0]}
-    part2 = {course.parts[1]}
-    part3 = {course.parts[2]}
-    />
-
-    <Total 
-     part1 = {course.parts[0]}
-     part2 = {course.parts[1]}
-     part3 = {course.parts[2]}
-    />
-    </div>
+    <Course course={course} />
   )
 }
 
