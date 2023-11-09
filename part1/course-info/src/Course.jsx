@@ -10,15 +10,15 @@ function Course({course}) {
     text= {course.name} />
 
     <Content
-    part1 = {course.parts[0]}
-    part2 = {course.parts[1]}
-    part3 = {course.parts[2]}
+    part1 = {course.parts}
+    // part2 = {course.parts[1]}
+    // part3 = {course.parts[2]}
     />
 
     <Total 
-     part1 = {course.parts[0]}
-     part2 = {course.parts[1]}
-     part3 = {course.parts[2]}
+     parts = {course.parts}
+    //  part2 = {course.parts[1]}
+    //  part3 = {course.parts[2]}
     />
     </div>
     

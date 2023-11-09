@@ -1,10 +1,13 @@
-function Total(props) {   
-    return(
-     
-      <div>
-         <p>Number of excercises {props.part1.excercises + props.part2.excercises + props.part3.excercises}</p>   
-      </div>
-    )
+function Total({ parts }) {
+   
+  
+    return (
+      <h4>
+        Number of exercises: {parts.reduce((accumulator, part) => {
+      return accumulator + part.exercises;
+    }, 0)}
+      </h4>
+    );
   }
-
-  export default Total
+  
+  export default Total;

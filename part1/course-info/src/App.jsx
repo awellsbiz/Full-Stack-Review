@@ -4,21 +4,25 @@ function App() {
   
 
   const course = {
-    name: 'Half stack app development',
+    id: 1,
+    name: 'Half Stack application development',
     parts: [
-    {
-    name: 'Fundamentails of React',
-    excercises: 10,
-  },
-  {
-    name: 'Using props to pass data',
-    excercises: 7,
-  },
-  {
-    name: 'State of a component',
-    excercises: 14,
-  }
-]
+      {
+        name: 'Fundamentals of React',
+        exercises: 10,
+        id: 1
+      },
+      {
+        name: 'Using props to pass data',
+        exercises: 7,
+        id: 2
+      },
+      {
+        name: 'State of a component',
+        exercises: 14,
+        id: 3
+      }
+    ]
   }
 
 

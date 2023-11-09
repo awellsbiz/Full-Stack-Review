@@ -1,11 +1,12 @@
 
-function Part(props) {
+function Part({parts}) {
+  const copy = parts.map(part => <p key= {part.name}> {part.name}: {part.exercises} </p>)
 
     return(
       <div>
-        <p>
-        {props.part.name} {props.part.excercises}
-       </p>
+        
+        {copy}
+       
       </div>
     )
   }
