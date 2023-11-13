@@ -1,40 +1,28 @@
 import { useState } from 'react'
 
 function App() {
-  const [phoneBook, setPhoneBook]= useState([{name: 'Albert Geinus'}])
-  const [person, setPerson] = useState('')
-  
-  const show = phoneBook.map(name => <p>{name.name}</p>)
+const [phoneBook, setPhoneBook] = useState([{name: 'Albert Einstein'}])
+const [entry, setEntry] = useState('')
 
-  function addName(e){
-    e.preventDefault()
-    const newEntry = {
-      name: person
-    }
-    setPhoneBook(phoneBook.concat(newEntry))
-    setPerson('')
-  }
-
-
-function handleOnChange(e) {
-  setPerson(e.target.value)
+function handleOnChange(e){
+  setEntry(e.target.value)
 }
 
- 
+function addEntry(){
+  e.preventDefault()
+  console.log('The button is working...')
+}
+
 
   return (
     <div>
-      <h1>Phone Book</h1>
-      <form onSubmit={addName}>
-        <h4>name: 
-          <input 
-          value={person}
-          onChange={handleOnChange}
-            />
-          <button type='submit'>Save</button> 
-        </h4>
+      <h1> Phone Book! </h1>
+      <form onSubmit={addEntry}>
+        <label>Name: </label>
+        <input value={entry} onChange={handleOnChange}/>
+        <button type='submit'>Save</button>
       </form>
-      {show}
+      <h1>Log</h1>
     </div>
   )
 }
