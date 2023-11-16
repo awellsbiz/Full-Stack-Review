@@ -3,13 +3,16 @@ import { useState } from 'react'
 function App() {
   const [phoneBook, setPhoneBook] = useState([{name: 'Albert Eistein'}])
   const [entry, setEntry] = useState({name: '', phone: ''})
+  const [filter, setFilter] = useState('')
+  const [result, setResult] = useState([])
 
   function handleOnChange(e){
-
-    const { name, value } = e.target;
-    console.log(e.target, 'right here...')
-
-    setEntry(prev => ({...prev, [name]:value}))
+    const { name, value} = e.target;
+    if (name === 'search'){
+      setFilter(value)
+    }else{
+      setEntry({...entry, [name]:value})
+    }
   }
 
   function addEntry(e){
@@ -34,9 +37,31 @@ function App() {
    return phoneBook.some(taco => taco.name === name)
     }
 
+  function handleSearch(e){
+    e.preventDefault()
+    const result = searchPhoneBook(filter)
+    setResult(result)
+  }
+
+  function searchPhoneBook(name){
+    return phoneBook.filter(entry => entry.name === name || entry.phone === name)
+  }
+
+  const searchLog = result.map(person => {
+  console.log(person)
+  return <p key={person}>{person.name}'s number is {person.phone}</p>
+})
+
   return (
     <div>
       <h1>Phone Book</h1>
+      <form onSubmit={handleSearch}>
+        <label htmlFor='search'>Search: </label>
+        <input name='search' value={filter} onChange={handleOnChange}/>
+        <button type='submit'>search</button>
+      </form>
+      {searchLog}
+      <h1>Add New</h1>
       <form onSubmit={addEntry}>
 
         <label htmlFor='name'>Name: </label>
