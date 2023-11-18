@@ -4,7 +4,7 @@ function App() {
   const [phoneBook, setPhoneBook] = useState([{name: 'Albert Eistein'}])
   const [entry, setEntry] = useState({name: '', phone: ''})
   const [filter, setFilter] = useState('')
-  const [result, setResult] = useState([])
+  const [searchResult, setSearchResult] = useState([])
 
   function handleOnChange(e){
     const { name, value} = e.target;
@@ -40,14 +40,17 @@ function App() {
   function handleSearch(e){
     e.preventDefault()
     const result = searchPhoneBook(filter)
-    setResult(result)
+    console.log('...this is it', result) 
+    setSearchResult(result)
   }
 
   function searchPhoneBook(name){
-    return phoneBook.filter(entry => entry.name === name || entry.phone === name)
+    return phoneBook.filter(entry => {
+      console.log('...from the .filter()', entry.name)
+      return entry.name === name || entry.phone === name })
   }
 
-  const searchLog = result.map(person => {
+  const searchLog = searchResult.map(person => {
   console.log(person)
   return <p key={person}>{person.name}'s number is {person.phone}</p>
 })
@@ -60,7 +63,12 @@ function App() {
         <input name='search' value={filter} onChange={handleOnChange}/>
         <button type='submit'>search</button>
       </form>
-      {searchLog}
+      {searchResult.length > 0 && (
+        <div> 
+          <p>Search Results</p>
+          {searchLog}
+        </div>
+      )}
       <h1>Add New</h1>
       <form onSubmit={addEntry}>
 
