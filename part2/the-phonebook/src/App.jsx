@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import Heading from './components/Heading'
+
 
 function App() {
   const [phoneBook, setPhoneBook] = useState([{name: 'Albert Eistein'}])
@@ -57,7 +59,7 @@ function App() {
 
   return (
     <div>
-      <h1>Phone Book</h1>
+      <Heading text='The Anthony PhoneBook' />
       <form onSubmit={handleSearch}>
         <label htmlFor='search'>Search: </label>
         <input name='search' value={filter} onChange={handleOnChange}/>
@@ -65,11 +67,11 @@ function App() {
       </form>
       {searchResult.length > 0 && (
         <div> 
-          <p>Search Results</p>
+          <Heading text='Name Found' />
           {searchLog}
         </div>
       )}
-      <h1>Add New</h1>
+      <Heading text='Add A New Entry' />
       <form onSubmit={addEntry}>
 
         <label htmlFor='name'>Name: </label>
@@ -79,7 +81,7 @@ function App() {
         <input name='phone' value={entry.phone} onChange={handleOnChange}/>
         <button type='submit'>Save</button>
       </form>
-      <h1>Log</h1>
+      <Heading text = 'PhoneBook Log' />
       {log}
     </div>
   )
