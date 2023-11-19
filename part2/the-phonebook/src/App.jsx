@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Heading from './components/Heading'
+import FormField from './components/FormField'
 
 
 function App() {
@@ -60,11 +61,14 @@ function App() {
   return (
     <div>
       <Heading text='The Anthony PhoneBook' />
-      <form onSubmit={handleSearch}>
-        <label htmlFor='search'>Search: </label>
-        <input name='search' value={filter} onChange={handleOnChange}/>
-        <button type='submit'>search</button>
-      </form>
+      <FormField 
+      handleAction={handleSearch}
+      inputName='search'
+      value={filter}
+      onChange={handleOnChange}
+      btnType='submit'
+      btnText='Search'
+      />
       {searchResult.length > 0 && (
         <div> 
           <Heading text='Name Found' />
