@@ -14,6 +14,7 @@ function App() {
     if (name === 'search'){
       setFilter(value)
     }else{
+      console.log('...from onChange function', name, value)
       setEntry({...entry, [name]:value})
     }
   }
@@ -78,11 +79,11 @@ function App() {
       <Heading text='Add A New Entry' />
       <FormField
         handleAction={addEntry}
-        inputName='Name'
+        inputName='name'
         value={entry.name}
         onChange={handleOnChange}
         extraInput={true}
-        inputName2='Phone'
+        inputName2='phone'
         value2={entry.phone}
         btnType='submit'
         btnText='Save'
