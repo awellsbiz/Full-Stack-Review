@@ -76,7 +76,20 @@ function App() {
         </div>
       )}
       <Heading text='Add A New Entry' />
-      <form onSubmit={addEntry}>
+      <FormField
+        handleAction={addEntry}
+        inputName='Name'
+        value={entry.name}
+        onChange={handleOnChange}
+        extraInput={true}
+        inputName2='Phone'
+        value2={entry.phone}
+        btnType='submit'
+        btnText='Save'
+
+        />
+
+      {/* <form onSubmit={addEntry}>
 
         <label htmlFor='name'>Name: </label>
         <input name= 'name' value={entry.name} onChange={handleOnChange}/>
@@ -84,7 +97,7 @@ function App() {
         <label htmlFor='phone'>Phone</label>
         <input name='phone' value={entry.phone} onChange={handleOnChange}/>
         <button type='submit'>Save</button>
-      </form>
+      </form> */}
       <Heading text = 'PhoneBook Log' />
       {log}
     </div>
