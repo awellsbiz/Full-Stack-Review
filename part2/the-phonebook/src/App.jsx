@@ -1,14 +1,27 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Heading from './components/Heading'
 import FormField from './components/FormField'
+import personService from './services/personService'
 
 
 function App() {
-  const [phoneBook, setPhoneBook] = useState([{name: 'Albert Eistein'}])
-  const [entry, setEntry] = useState({name: '', phone: ''})
+  const [phoneBook, setPhoneBook] = useState([])
+  const [entry, setEntry] = useState({name: '', number: ''})
   const [filter, setFilter] = useState('')
   const [searchResult, setSearchResult] = useState([])
 
+
+  useEffect(() => {
+    console.log('effect')
+    personService
+    .getAll()
+    .then(response =>{
+      console.log(response)
+      setPhoneBook(response)
+    })
+    
+
+  }, [])
   function handleOnChange(e){
     const { name, value} = e.target;
     if (name === 'search'){
@@ -23,7 +36,7 @@ function App() {
     e.preventDefault()
     const newEntry = {
       name: entry.name,
-      phone: entry.phone
+      number: entry.number
     }
     if(!checkForDuplicate(newEntry.name)){
 
@@ -35,7 +48,7 @@ function App() {
     
   }
   
-  const log = phoneBook.map(entry => <p key={entry.name}>{entry.name}'s phone number is {entry.phone}</p>)
+  const log = phoneBook.map(entry => <p key={entry.name}>{entry.name}'s phone number is {entry.number}</p>)
 
   function checkForDuplicate(name){
    return phoneBook.some(taco => taco.name === name)
@@ -51,12 +64,12 @@ function App() {
   function searchPhoneBook(name){
     return phoneBook.filter(entry => {
       console.log('...from the .filter()', entry.name)
-      return entry.name === name || entry.phone === name })
+      return entry.name === name || entry.number === name })
   }
 
   const searchLog = searchResult.map(person => {
   console.log(person)
-  return <p key={person}>{person.name}'s number is {person.phone}</p>
+  return <p key={person}>{person.name}'s number is {person.number}</p>
 })
 
   return (
